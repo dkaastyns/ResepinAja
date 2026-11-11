@@ -16,7 +16,7 @@ const LazyImage = ({
     <div className={`relative overflow-hidden bg-cream ${containerClassName}`}>
       {/* Skeleton Shimmer while loading */}
       {!isLoaded && !hasError && (
-        <div className="absolute inset-0 skeleton z-10 pointer-events-none" />
+        <div className="absolute inset-0 skeleton rounded-none z-10 pointer-events-none" />
       )}
 
       {/* Fallback when image fails to load or no src */}

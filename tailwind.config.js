@@ -47,6 +47,7 @@ export default {
         'float': 'float 4s ease-in-out infinite',
         'shimmer': 'shimmer 2s infinite linear',
         'pulse-subtle': 'pulseSubtle 3s ease-in-out infinite',
+        'card-enter': 'cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both',
       },
       keyframes: {
         fadeIn: {
@@ -82,6 +83,10 @@ export default {
         pulseSubtle: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.75' },
+        },
+        cardEnter: {
+          '0%': { opacity: '0', transform: 'translateY(10px) scale(0.97)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
       },
     },

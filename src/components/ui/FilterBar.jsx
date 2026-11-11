@@ -20,11 +20,12 @@ const FilterBar = ({ filters, onFilterChange, sortBy, onSortChange }) => {
     const isActive = filters[group] === value
     return (
       <button
+        type="button"
         onClick={() => onFilterChange(group, isActive ? '' : value)}
-        className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+        className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 active:scale-95 ${
           isActive
-            ? 'bg-green-primary text-white border-green-primary'
-            : 'bg-surface text-text-secondary border-border-color hover:border-green-secondary hover:text-green-primary'
+            ? 'bg-green-primary text-white border-green-primary shadow-xs ring-2 ring-green-primary/20'
+            : 'bg-surface text-text-secondary border-border-color hover:border-green-secondary hover:text-green-primary hover:bg-cream-light/60'
         }`}
       >
         {label}

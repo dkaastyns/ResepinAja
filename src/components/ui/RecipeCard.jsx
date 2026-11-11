@@ -5,7 +5,7 @@ import LazyImage from './LazyImage'
 import { useToast } from '../../context/ToastContext'
 import { formatDuration, getTotalTime, getDifficultyLabel, getDifficultyColor } from '../../utils/helpers'
 
-const RecipeCard = ({ recipe, isFavorite, onToggleFavorite, className = '' }) => {
+const RecipeCard = ({ recipe, isFavorite, onToggleFavorite, className = '', style }) => {
   const { showToast } = useToast()
   const [animatingHeart, setAnimatingHeart] = useState(false)
   const totalTime = getTotalTime(recipe)
@@ -31,7 +31,8 @@ const RecipeCard = ({ recipe, isFavorite, onToggleFavorite, className = '' }) =>
 
   return (
     <div
-      className={`card group relative flex flex-col h-full bg-surface hover:-translate-y-1.5 hover:shadow-card-hover hover:border-green-secondary/40 transition-all duration-300 ease-out ${className}`}
+      style={style}
+      className={`card group relative flex flex-col h-full bg-surface hover:-translate-y-1 hover:shadow-card-hover hover:border-green-secondary/30 active:scale-[0.98] transition-all duration-200 ease-out cursor-pointer ${className}`}
     >
       {/* Top Image area */}
       <Link to={`/resep/${recipe.id}`} className="block relative overflow-hidden rounded-t-2xl">
@@ -39,7 +40,7 @@ const RecipeCard = ({ recipe, isFavorite, onToggleFavorite, className = '' }) =>
           src={recipe.image}
           alt={recipe.title}
           containerClassName="h-44 sm:h-48 w-full"
-          className="group-hover:scale-108 transition-transform duration-700 ease-out"
+          className="group-hover:scale-105 transition-transform duration-500 ease-out will-change-transform"
         />
 
         {/* Ambient Dark Gradient on bottom of image for readability */}
@@ -67,7 +68,7 @@ const RecipeCard = ({ recipe, isFavorite, onToggleFavorite, className = '' }) =>
           <button
             onClick={handleFavoriteClick}
             aria-label={isFavorite ? 'Hapus favorit' : 'Tambah favorit'}
-            className={`absolute top-2.5 right-2.5 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+            className={`absolute top-2.5 right-2.5 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ease-out shadow-md active:scale-90 ${
               isFavorite
                 ? 'bg-red-500 text-white shadow-red-500/30'
                 : 'glass-badge text-text-secondary hover:text-red-500 hover:scale-110 active:scale-90'
