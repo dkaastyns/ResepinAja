@@ -16,6 +16,7 @@ const MealPlanner = lazy(() => import('./pages/MealPlanner'))
 const ShoppingList = lazy(() => import('./pages/ShoppingList'))
 const Profile = lazy(() => import('./pages/Profile'))
 const Settings = lazy(() => import('./pages/Settings'))
+const Contact = lazy(() => import('./pages/Contact'))
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
@@ -39,6 +40,7 @@ function App() {
               <Route path="belanja" element={<ShoppingList />} />
               <Route path="profil" element={<Profile />} />
               <Route path="pengaturan" element={<Settings />} />
+              <Route path="kontak" element={<Contact />} />
             </Route>
           </Routes>
         </Suspense>

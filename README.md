@@ -48,13 +48,14 @@ Dikembangkan dengan pendekatan **Mobile-First & Desktop-Responsive PWA**, aplika
 
 | Data Mahasiswa | Keterangan |
 | :--- | :--- |
-| **Nama Lengkap** | *Silakan isi nama Anda (dapat diatur di halaman Profil)* |
-| **NIM** | *Silakan isi NIM Anda (dapat diatur di halaman Profil)* |
-| **Kelompok** | *Silakan isi Kelompok Anda (dapat diatur di halaman Profil)* |
-| **Program Studi** | Teknik Informatika / Ilmu Komputer / Sistem Informasi |
-| **Mata Kuliah** | Praktikum Rekayasa Perangkat Lunak / Pemrograman Web |
+| **Nama Lengkap** | **Ahmad Dika Styansah** |
+| **NIM** | **21120124130052** |
+| **Kelompok** | **Kelompok 23** |
+| **Program Studi** | Teknik Komputer |
+| **Fakultas / Universitas** | Fakultas Teknik / Universitas Diponegoro |
+| **Mata Kuliah** | Praktikum Pemrograman Perangkat Bergerak |
 
-> 💡 **Catatan**: Data nama, NIM, dan kelompok dapat langsung diperbarui melalui menu **Profil ➔ Edit Profil** di dalam aplikasi dan tersimpan secara persisten.
+> 💡 **Info Kontak**: Halaman khusus **Info Kontak** telah tersedia di aplikasi (`/kontak`) yang menampilkan profil terverifikasi, tautan GitHub, email, dan fasilitas salin cepat identitas pengembang.
 
 ---
 
@@ -122,6 +123,12 @@ Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitu
 - **Tentang Proyek**: Modal interaktif berisi rincian PRD, identitas tim, dan arsitektur sistem.
 - **Reset Data**: Fitur pembersihan penyimpanan lokal dengan konfirmasi keamanan.
 
+### 11. 📇 Info Kontak & Tim Pengembang
+- Halaman identitas resmi pengembang: **Ahmad Dika Styansah** (NIM: **21120124130052**, Kelompok: **23**).
+- Tombol salin satu-klik (*One-Click Copy*) untuk NIM, Kelompok, dan seluruh data identitas mahasiswa.
+- Tautan kontak email mahasiswa dan repositori GitHub pengembang.
+- Formulir umpan balik (*Feedback Form*) langsung untuk pengguna.
+
 ---
 
 ## 🎨 Tampilan Antarmuka & UX Mewah
@@ -140,7 +147,8 @@ Aplikasi dibangun mengikuti filosofi desain: *Modern, Warm, Clean, Premium, Mini
 | **Secondary Text** | `#77786F` | Teks deskripsi dan metadata sekunder |
 | **Border Color** | `#EAE8E1` | Garis batas tipis yang elegan |
 
-### 💫 Sentuhan Mikroanimasi:
+### 💫 Sentuhan Mikroanimasi & Liquid Glass Design:
+- **iOS Liquid Glass Floating Capsule Navigation**: Bilah navigasi atas (Desktop) dan bilah navigasi bawah (Mobile) dirancang melayang (*floating capsule*) dengan efek kaca cair (*liquid glass / frosted glassmorphism blur-2xl*) ala iOS iPhone dengan pantulan specular dan border halus.
 - **Startup Splash Animation**: Layar intro memukau saat membuka aplikasi.
 - **Heart Pop Bounce**: Animasi pegas pada ikon favorit saat ditekan.
 - **Floating Luxury Toast Notification**: Notifikasi mengambang saat aksi berhasil dilakukan.

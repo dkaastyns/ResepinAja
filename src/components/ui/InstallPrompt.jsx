@@ -80,7 +80,7 @@ const InstallPrompt = () => {
       aria-label="Pemberitahuan Pasang Aplikasi"
       className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-40 max-w-sm w-[calc(100%-2rem)] sm:w-88 animate-slide-up"
     >
-      <div className="relative bg-surface/95 backdrop-blur-xl border border-border-color/90 rounded-3xl p-4 sm:p-5 shadow-2xl ring-1 ring-black/5">
+      <div className="relative liquid-glass-card rounded-3xl p-4 sm:p-5 shadow-2xl ring-1 ring-black/5 border border-white/80">
         {/* Tombol Silang (X) di pojok kanan atas */}
         <button
           onClick={handleDismiss}

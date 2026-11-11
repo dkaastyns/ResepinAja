@@ -304,6 +304,7 @@ const Profile = () => {
       {/* Quick Menu Links */}
       <div className="bg-surface rounded-3xl border border-border-color divide-y divide-border-color shadow-card overflow-hidden">
         {[
+          { label: 'Info Kontak Pengembang (Kelompok 23)', to: '/kontak', desc: 'Identitas Ahmad Dika Styansah & Tim', emoji: '📇' },
           { label: 'Jelajah Resep Nusantara', to: '/jelajah', desc: 'Cari inspirasi masakan harian', emoji: '🍲' },
           { label: 'Cari dari Bahan di Kulkas', to: '/cari-bahan', desc: 'Rekomendasi masakan otomatis', emoji: '🥦' },
           { label: 'Pengaturan & Backup Data', to: '/pengaturan', desc: 'Ekspor, impor, dan preferensi lokal', emoji: '⚙️' },

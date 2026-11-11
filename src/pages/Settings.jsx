@@ -169,6 +169,25 @@ React 18, Vite 5, Tailwind CSS v3, vite-plugin-pwa, React Router v6, Supabase Po
       </div>
 
       <Section title="Informasi & Dokumentasi Proyek">
+        <Link
+          to="/kontak"
+          className="w-full flex items-center gap-3.5 p-4 sm:p-5 hover:bg-cream-light/60 transition-colors text-left group"
+        >
+          <div className="w-10 h-10 rounded-2xl bg-green-primary/10 text-green-primary flex items-center justify-center flex-shrink-0">
+            <Users size={18} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-text-primary group-hover:text-green-primary transition-colors">
+              Info Kontak Pengembang (Kelompok 23)
+            </p>
+            <p className="text-xs text-text-secondary mt-0.5">
+              Ahmad Dika Styansah • NIM 21120124130052 • Kelompok 23
+            </p>
+          </div>
+          <span className="text-text-muted group-hover:text-green-primary group-hover:translate-x-1 transition-all">
+            ›
+          </span>
+        </Link>
         <SettingItem
           icon={Info}
           label="Tentang Proyek ResepinAja"
