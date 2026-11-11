@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import PageLoader from './components/ui/PageLoader'
 import StartupSplash from './components/ui/StartupSplash'
+import DeveloperContactPopup from './components/ui/DeveloperContactPopup'
 import { ToastProvider } from './context/ToastContext'
 
 // Code splitting & Lazy Loading for all routes
@@ -20,11 +21,23 @@ const Contact = lazy(() => import('./pages/Contact'))
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
+  const [showContactPopup, setShowContactPopup] = useState(false)
+
+  const handleSplashFinish = () => {
+    setShowSplash(false)
+    setShowContactPopup(true)
+  }
 
   return (
     <ToastProvider>
       {/* Cool Startup Animation on initial load */}
-      {showSplash && <StartupSplash onFinish={() => setShowSplash(false)} />}
+      {showSplash && <StartupSplash onFinish={handleSplashFinish} />}
+
+      {/* Developer Contact Info Pop up right after splash */}
+      <DeveloperContactPopup
+        isOpen={showContactPopup}
+        onClose={() => setShowContactPopup(false)}
+      />
 
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
