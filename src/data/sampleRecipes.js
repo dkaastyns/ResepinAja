@@ -188,7 +188,7 @@ export const sampleRecipes = [
     id: 'recipe_006',
     title: 'Pisang Goreng Crispy',
     description: 'Pisang goreng renyah dengan lapisan tepung yang tipis dan gurih. Camilan favorit semua usia.',
-    image: 'https://images.unsplash.com/photo-1587334206888-db4b82f54f09?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1576867917480-152bca50166e?w=800&q=80',
     category: 'Camilan',
     ingredients: [
       { name: 'Pisang kepok', quantity: '5', unit: 'buah' },
@@ -350,7 +350,7 @@ export const sampleRecipes = [
     id: 'recipe_011',
     title: 'Udang Saus Tiram',
     description: 'Udang segar tumis dengan saus tiram yang gurih, manis, dan sedikit pedas. Siap saji dalam waktu singkat.',
-    image: 'https://images.unsplash.com/photo-1565680018093-ebb6b9ab5460?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1559742811-822873691df8?w=800&q=80',
     category: 'Seafood',
     ingredients: [
       { name: 'Udang segar', quantity: '500', unit: 'gram' },
@@ -383,7 +383,7 @@ export const sampleRecipes = [
     id: 'recipe_012',
     title: 'Roti Bakar Avocado',
     description: 'Roti bakar dengan topping avocado lembut, telur mata sapi, dan taburan biji wijen. Sarapan modern yang sehat dan mengenyangkan.',
-    image: 'https://images.unsplash.com/photo-1541519227354-08fa5d50c820?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80',
     category: 'Sarapan',
     ingredients: [
       { name: 'Roti tawar', quantity: '2', unit: 'lembar' },

@@ -354,7 +354,7 @@ VALUES
 (
   'Pisang Goreng Crispy',
   'Pisang goreng renyah dengan lapisan tepung yang tipis dan gurih. Camilan favorit semua usia.',
-  'https://images.unsplash.com/photo-1587334206888-db4b82f54f09?w=800&q=80',
+  'https://images.unsplash.com/photo-1576867917480-152bca50166e?w=800&q=80',
   'Camilan',
   '[
     {"name": "Pisang kepok", "quantity": "5", "unit": "buah"},
@@ -486,7 +486,7 @@ VALUES
 (
   'Udang Saus Tiram',
   'Udang segar tumis dengan saus tiram yang gurih, manis, dan sedikit pedas. Siap saji dalam waktu singkat.',
-  'https://images.unsplash.com/photo-1565680018093-ebb6b9ab5460?w=800&q=80',
+  'https://images.unsplash.com/photo-1559742811-822873691df8?w=800&q=80',
   'Seafood',
   '[
     {"name": "Udang segar", "quantity": "500", "unit": "gram"},
@@ -513,7 +513,7 @@ VALUES
 (
   'Roti Bakar Avocado',
   'Roti bakar dengan topping avocado lembut, telur mata sapi, dan taburan biji wijen. Sarapan modern yang sehat dan mengenyangkan.',
-  'https://images.unsplash.com/photo-1541519227354-08fa5d50c820?w=800&q=80',
+  'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80',
   'Sarapan',
   '[
     {"name": "Roti tawar", "quantity": "2", "unit": "lembar"},
