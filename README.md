@@ -51,11 +51,12 @@ Dikembangkan dengan pendekatan **Mobile-First & Desktop-Responsive PWA**, aplika
 | **Nama Lengkap** | **Ahmad Dika Styansah** |
 | **NIM** | **21120124130052** |
 | **Kelompok** | **Kelompok 23** |
+| **Email** | `dikatzy@gmail.com` |
 | **Program Studi** | Teknik Komputer |
 | **Fakultas / Universitas** | Fakultas Teknik / Universitas Diponegoro |
 | **Mata Kuliah** | Praktikum Pemrograman Perangkat Bergerak |
 
-> 💡 **Info Kontak**: Halaman khusus **Info Kontak** telah tersedia di aplikasi (`/kontak`) yang menampilkan profil terverifikasi, tautan GitHub, email, dan fasilitas salin cepat identitas pengembang.
+> 💡 **Info Kontak**: Halaman **Info Kontak** telah tersedia di aplikasi (`/kontak`) yang menampilkan profil pengembang, kontak email (`dikatzy@gmail.com`), tautan GitHub, dan fasilitas salin cepat identitas pengembang.
 
 ---
 

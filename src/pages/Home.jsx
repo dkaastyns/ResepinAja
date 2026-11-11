@@ -11,6 +11,8 @@ import {
   BookOpen,
   Tag,
   TrendingUp,
+  Zap,
+  Calendar,
 } from 'lucide-react'
 import RecipeCard from '../components/ui/RecipeCard'
 import CategoryCard from '../components/ui/CategoryCard'
@@ -68,32 +70,30 @@ const Home = () => {
 
   return (
     <div className="space-y-8 sm:space-y-10 animate-fade-in pb-6">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl sm:rounded-4xl bg-gradient-to-br from-green-primary via-green-dark to-green-secondary p-6 sm:p-8 lg:p-10 shadow-lg text-white">
-        {/* Ambient background glows */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-accent-orange/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-green-secondary/30 blur-3xl pointer-events-none" />
-
+      {/* Hero Section - Clean, Editorial, Anti-Slop */}
+      <div className="relative overflow-hidden rounded-3xl bg-[#1E301B] p-6 sm:p-8 lg:p-10 shadow-lg text-white border border-[#2B4327]">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Greeting, Title, Search Bar */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold text-white/90">
-              <Sparkles size={13} className="text-accent-orange" />
-              <span>Inspirasi Menu Harian Praktis</span>
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-white/90">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+              <span>Resep Masakan Rumahan</span>
             </div>
 
             <div>
-              <p className="text-white/80 text-sm font-medium">
-                {getGreeting()}, <span className="text-white font-bold">{profile.name.split(' ')[0]}</span> 👋
+              <p className="text-white/70 text-sm font-medium">
+                {getGreeting()}, <span className="text-white font-bold">{profile.name.split(' ')[0]}</span>
               </p>
               <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-black mt-1 leading-tight tracking-tight">
-                Mau masak lezat <br className="hidden sm:inline" />
-                apa hari ini?
+                Mau masak apa hari ini?
               </h1>
+              <p className="text-white/70 text-xs sm:text-sm mt-2 max-w-lg leading-relaxed">
+                Temukan inspirasi masakan harian, cari berdasarkan sisa bahan di kulkas, atau kelola jadwal menu mingguan.
+              </p>
             </div>
 
             {/* Search Bar */}
-            <form onSubmit={handleSearch} className="max-w-xl">
+            <form onSubmit={handleSearch} className="max-w-xl pt-1">
               <div className="relative flex items-center">
                 <Search
                   size={18}
@@ -103,12 +103,12 @@ const Home = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Cari nasi goreng, ayam bakar, bumbu..."
-                  className="w-full bg-white rounded-2xl pl-11 pr-24 py-3.5 sm:py-4 text-text-primary text-sm placeholder-text-secondary focus:outline-none focus:ring-4 focus:ring-white/30 shadow-card transition-all"
+                  placeholder="Cari nasi goreng, soto ayam, balado..."
+                  className="w-full bg-white rounded-2xl pl-11 pr-24 py-3.5 sm:py-4 text-text-primary text-sm placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-green-secondary shadow-sm transition-all"
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 px-4 py-2 bg-green-primary hover:bg-green-dark text-white text-xs font-bold rounded-xl transition-all shadow-sm active:scale-95"
+                  className="absolute right-2 px-4 py-2 bg-green-primary hover:bg-green-dark text-white text-xs font-bold rounded-xl transition-all shadow-xs active:scale-95"
                 >
                   Cari
                 </button>
@@ -117,61 +117,58 @@ const Home = () => {
 
             {/* Quick Action Badges */}
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs text-white/70 font-medium">Saran:</span>
+              <span className="text-xs text-white/60 font-medium">Pilihan cepat:</span>
               {[
-                { label: 'Cari dari Bahan', to: '/cari-bahan', emoji: '🥦' },
-                { label: 'Rencana Menu', to: '/jadwal', emoji: '📅' },
-                { label: 'Makanan Cepat ≤20m', to: '/jelajah', emoji: '⚡' },
-              ].map(({ label, to, emoji }) => (
+                { label: 'Cari dari Bahan', to: '/cari-bahan', icon: Sparkles },
+                { label: 'Rencana Menu', to: '/jadwal', icon: Calendar },
+                { label: 'Masak Cepat ≤20m', to: '/jelajah', icon: Zap },
+              ].map(({ label, to, icon: IconComponent }) => (
                 <Link
                   key={label}
                   to={to}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold backdrop-blur-sm border border-white/10 transition-all hover:scale-105"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 transition-colors"
                 >
-                  <span>{emoji}</span>
+                  <IconComponent size={12} className="text-white/80" />
                   <span>{label}</span>
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Right Column (Desktop): Featured Floating Recipe Card */}
+          {/* Right Column (Desktop): Featured Recipe Card */}
           {featuredRecipe && (
             <div className="hidden lg:block lg:col-span-5">
-              <div className="relative group">
-                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-accent-orange/40 to-green-secondary/40 blur-xl opacity-75 group-hover:opacity-100 transition duration-700" />
-                <div className="relative rounded-3xl overflow-hidden bg-surface/90 backdrop-blur-md p-4 text-text-primary border border-white/50 shadow-2xl">
-                  <div className="relative h-48 rounded-2xl overflow-hidden mb-3">
-                    <LazyImage
-                      src={featuredRecipe.image}
-                      alt={featuredRecipe.title}
-                      containerClassName="h-full w-full"
-                      className="group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="glass-badge px-3 py-1 rounded-xl text-xs font-bold text-green-primary">
-                        ⭐ Rekomendasi Hari Ini
-                      </span>
-                    </div>
+              <div className="relative rounded-2xl overflow-hidden bg-surface p-4 text-text-primary border border-white/20 shadow-xl">
+                <div className="relative h-48 rounded-xl overflow-hidden mb-3">
+                  <LazyImage
+                    src={featuredRecipe.image}
+                    alt={featuredRecipe.title}
+                    containerClassName="h-full w-full"
+                    className="hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="backdrop-blur-md bg-black/60 text-white px-3 py-1 rounded-lg text-xs font-semibold">
+                      Pilihan Hari Ini
+                    </span>
                   </div>
-                  <h3 className="font-extrabold text-lg text-text-primary group-hover:text-green-primary transition-colors line-clamp-1">
-                    {featuredRecipe.title}
-                  </h3>
-                  <p className="text-xs text-text-secondary line-clamp-2 mt-1">
-                    {featuredRecipe.description}
-                  </p>
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-border-color">
-                    <div className="flex items-center gap-2 text-xs text-text-secondary font-medium">
-                      <Clock size={14} className="text-green-primary" />
-                      <span>{getTotalTime(featuredRecipe)} menit</span>
-                    </div>
-                    <Link
-                      to={`/resep/${featuredRecipe.id}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-green-primary hover:text-green-dark group-hover:translate-x-0.5 transition-all"
-                    >
-                      Masak Sekarang <ArrowRight size={13} />
-                    </Link>
+                </div>
+                <h3 className="font-bold text-lg text-text-primary hover:text-green-primary transition-colors line-clamp-1">
+                  {featuredRecipe.title}
+                </h3>
+                <p className="text-xs text-text-secondary line-clamp-2 mt-1">
+                  {featuredRecipe.description}
+                </p>
+                <div className="flex items-center justify-between mt-3 pt-3 border-t border-border-color">
+                  <div className="flex items-center gap-1.5 text-xs text-text-secondary font-medium">
+                    <Clock size={13} className="text-green-primary" />
+                    <span>{getTotalTime(featuredRecipe)} menit</span>
                   </div>
+                  <Link
+                    to={`/resep/${featuredRecipe.id}`}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-green-primary hover:text-green-dark transition-colors"
+                  >
+                    Masak Sekarang <ArrowRight size={13} />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -321,28 +318,25 @@ const Home = () => {
       <section>
         <Link
           to="/cari-bahan"
-          className="group relative block overflow-hidden rounded-3xl bg-gradient-to-r from-cream via-surface to-cream-light border border-border-color p-6 sm:p-8 hover:shadow-card-hover transition-all duration-300"
+          className="group relative block overflow-hidden rounded-2xl bg-surface border border-border-color p-5 sm:p-7 hover:border-green-secondary transition-all duration-200 shadow-xs"
         >
           <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-primary to-green-secondary text-white flex items-center justify-center text-3xl shadow-md group-hover:scale-110 transition-transform duration-300">
-                🥦
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-cream border border-border-color text-green-primary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
+                <ChefHat size={26} />
               </div>
               <div>
-                <span className="badge badge-green text-[10px] font-bold uppercase mb-1">
-                  Fitur Unggulan
-                </span>
-                <h3 className="font-extrabold text-lg sm:text-xl text-text-primary group-hover:text-green-primary transition-colors">
-                  Bingung mau masak apa dengan bahan di kulkas?
+                <h3 className="font-bold text-base sm:text-lg text-text-primary group-hover:text-green-primary transition-colors">
+                  Punya sisa bahan makanan di kulkas?
                 </h3>
-                <p className="text-xs sm:text-sm text-text-secondary mt-0.5">
-                  Masukkan bahan yang ada, ResepinAja akan hitung persentase kecocokan resepnya!
+                <p className="text-xs sm:text-sm text-text-secondary mt-0.5 max-w-xl">
+                  Masukkan bahan yang tersedia, ResepinAja akan mencarikan resep masakan yang sesuai tanpa perlu belanja bahan baru.
                 </p>
               </div>
             </div>
-            <div className="inline-flex items-center gap-2 btn-primary text-xs py-2.5 px-5 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+            <div className="inline-flex items-center gap-2 btn-primary text-xs py-2 px-4 rounded-xl group-hover:translate-x-0.5 transition-transform self-end sm:self-center flex-shrink-0">
               <span>Coba Sekarang</span>
-              <ArrowRight size={15} />
+              <ArrowRight size={14} />
             </div>
           </div>
         </Link>

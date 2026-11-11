@@ -12,6 +12,9 @@ import {
   IdCard,
   Mail,
   Camera,
+  Compass,
+  Sparkles,
+  Settings,
 } from 'lucide-react'
 import { useProfile } from '../hooks/useProfile'
 import { useRecipes } from '../hooks/useRecipes'
@@ -56,7 +59,7 @@ const Profile = () => {
     })
     setEditing(false)
     showToast({
-      message: 'Data profil berhasil diperbarui! ✨',
+      message: 'Data profil berhasil diperbarui.',
       type: 'success',
     })
   }
@@ -247,7 +250,7 @@ const Profile = () => {
                 value={editEmail}
                 onChange={(e) => setEditEmail(e.target.value)}
                 className="input-field"
-                placeholder="email@mahasiswa.ac.id"
+                placeholder="contoh: dikatzy@gmail.com"
               />
             </div>
 
@@ -302,19 +305,21 @@ const Profile = () => {
       </div>
 
       {/* Quick Menu Links */}
-      <div className="bg-surface rounded-3xl border border-border-color divide-y divide-border-color shadow-card overflow-hidden">
+      <div className="bg-surface rounded-2xl border border-border-color divide-y divide-border-color shadow-xs overflow-hidden">
         {[
-          { label: 'Info Kontak Pengembang (Kelompok 23)', to: '/kontak', desc: 'Identitas Ahmad Dika Styansah & Tim', emoji: '📇' },
-          { label: 'Jelajah Resep Nusantara', to: '/jelajah', desc: 'Cari inspirasi masakan harian', emoji: '🍲' },
-          { label: 'Cari dari Bahan di Kulkas', to: '/cari-bahan', desc: 'Rekomendasi masakan otomatis', emoji: '🥦' },
-          { label: 'Pengaturan & Backup Data', to: '/pengaturan', desc: 'Ekspor, impor, dan preferensi lokal', emoji: '⚙️' },
-        ].map(({ label, to, desc, emoji }) => (
+          { label: 'Info Kontak Pengembang', to: '/kontak', desc: 'Ahmad Dika Styansah • Kelompok 23', icon: IdCard },
+          { label: 'Jelajah Resep Nusantara', to: '/jelajah', desc: 'Koleksi inspirasi masakan harian', icon: Compass },
+          { label: 'Cari dari Bahan di Kulkas', to: '/cari-bahan', desc: 'Rekomendasi masakan otomatis', icon: Sparkles },
+          { label: 'Pengaturan & Backup Data', to: '/pengaturan', desc: 'Ekspor, impor, dan preferensi lokal', icon: Settings },
+        ].map(({ label, to, desc, icon: ItemIcon }) => (
           <Link
             key={to}
             to={to}
-            className="flex items-center gap-4 p-4 sm:p-5 hover:bg-background transition-colors group"
+            className="flex items-center gap-3.5 p-4 hover:bg-cream-light/60 transition-colors group"
           >
-            <span className="text-2xl">{emoji}</span>
+            <div className="w-10 h-10 rounded-xl bg-background border border-border-color text-text-secondary group-hover:text-green-primary flex items-center justify-center flex-shrink-0 transition-colors">
+              <ItemIcon size={18} />
+            </div>
             <div className="flex-1 min-w-0">
               <h4 className="font-bold text-sm text-text-primary group-hover:text-green-primary transition-colors">
                 {label}

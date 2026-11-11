@@ -4,18 +4,13 @@ import {
   Users,
   Mail,
   Github,
-  Globe,
   GraduationCap,
   Copy,
   Check,
-  Sparkles,
-  Phone,
   MapPin,
   Send,
-  MessageSquare,
-  ShieldCheck,
-  HeartHandshake,
   ExternalLink,
+  Code2,
 } from 'lucide-react'
 import { useProfile } from '../hooks/useProfile'
 import { useToast } from '../context/ToastContext'
@@ -28,23 +23,19 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Explicit requirements:
-  // Nama: Ahmad Dika Styansah
-  // NIM: 21120124130052
-  // Kelompok: 23
   const contactInfo = {
     name: 'Ahmad Dika Styansah',
     nim: '21120124130052',
     kelompok: '23',
-    kelompokFull: 'Kelompok 23',
-    role: 'Lead Developer & Mahasiswa',
+    kelompokLabel: 'Kelompok 23',
     prodi: 'Teknik Komputer',
     universitas: 'Universitas Diponegoro',
     matkul: 'Praktikum Pemrograman Perangkat Bergerak',
-    email: 'ahmad.dika@students.undip.ac.id',
-    github: 'https://github.com/dkaastyns',
-    repo: 'https://github.com/dkaastyns/ResepinAja',
-    location: 'Semarang, Jawa Tengah, Indonesia',
+    email: 'dikatzy@gmail.com',
+    githubUrl: 'https://github.com/dkaastyns',
+    githubHandle: 'dkaastyns',
+    repoUrl: 'https://github.com/dkaastyns/ResepinAja',
+    location: 'Semarang, Indonesia',
   }
 
   const copyToClipboard = (text, fieldName, label) => {
@@ -52,18 +43,18 @@ const Contact = () => {
       navigator.clipboard.writeText(text)
       setCopiedField(fieldName)
       showToast({
-        message: `${label} berhasil disalin ke clipboard! 📋`,
+        message: `${label} berhasil disalin`,
         type: 'success',
       })
-      setTimeout(() => setCopiedField(null), 2500)
+      setTimeout(() => setCopiedField(null), 2000)
     }
   }
 
   const handleSendMessage = (e) => {
     e.preventDefault()
-    if (!formData.name || !formData.message) {
+    if (!formData.name.trim() || !formData.message.trim()) {
       showToast({
-        message: 'Mohon isi nama dan pesan Anda terlebih dahulu.',
+        message: 'Mohon lengkapi nama dan pesan',
         type: 'error',
       })
       return
@@ -74,284 +65,265 @@ const Contact = () => {
       setIsSubmitting(false)
       setFormData({ name: '', email: '', message: '' })
       showToast({
-        message: `Terima kasih ${formData.name}! Pesan Anda telah terkirim ke pengembang. ✨`,
+        message: 'Pesan Anda berhasil terkirim',
         type: 'success',
       })
-    }, 600)
+    }, 500)
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-fade-in pb-12">
-      {/* Header section with liquid glass badge */}
-      <div className="text-center space-y-3 pt-2">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full liquid-glass-capsule shadow-sm">
-          <Sparkles size={14} className="text-green-primary animate-pulse" />
-          <span className="text-xs font-extrabold text-green-primary tracking-wide uppercase">
-            Informasi Resmi Pengembang
-          </span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-text-primary tracking-tight">
-          Info Kontak & Tim
+    <div className="max-w-3xl mx-auto space-y-6 animate-fade-in pb-10">
+      {/* Header */}
+      <div className="space-y-1">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">
+          Kontak Pengembang
         </h1>
-        <p className="text-text-secondary text-sm sm:text-base max-w-xl mx-auto">
-          Informasi identitas pengembang dan kontak proyek aplikasi resep makanan modern{' '}
-          <span className="font-bold text-green-primary">Resepin</span>
-          <span className="font-bold text-accent-orange">Aja</span>.
+        <p className="text-sm text-text-secondary">
+          Identitas pengembang dan informasi proyek aplikasi ResepinAja.
         </p>
       </div>
 
-      {/* Main Developer Liquid Glass Card */}
-      <div className="liquid-glass-card rounded-3xl p-6 sm:p-8 relative overflow-hidden border border-white/80 shadow-card">
-        {/* Decorative glass glow blobs */}
-        <div className="absolute -top-16 -right-16 w-56 h-56 bg-green-primary/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-accent-orange/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8">
-          {/* Avatar with iOS-style gradient border */}
-          <div className="relative group flex-shrink-0">
-            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-tr from-green-primary via-green-secondary to-accent-orange p-1 shadow-lg shadow-green-primary/20">
-              <div className="w-full h-full rounded-[22px] bg-surface flex flex-col items-center justify-center text-center p-2 overflow-hidden">
-                <span className="text-3xl sm:text-4xl font-black text-green-primary tracking-tighter">
-                  AD
-                </span>
-                <span className="text-[10px] font-bold text-text-muted mt-1 uppercase tracking-wider">
-                  Kelompok 23
-                </span>
-              </div>
-            </div>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-green-primary text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1 whitespace-nowrap">
-              <ShieldCheck size={11} />
-              <span>Verified Dev</span>
-            </div>
+      {/* Main Profile Card - Clean, Human, Anti-Slop Bento */}
+      <div className="bg-surface border border-border-color rounded-2xl p-6 sm:p-7 shadow-xs">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6">
+          {/* Avatar Monogram */}
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-cream border border-border-color flex items-center justify-center flex-shrink-0">
+            <span className="text-xl sm:text-2xl font-black text-green-dark tracking-tight">
+              AD
+            </span>
           </div>
 
-          {/* Profile Details */}
-          <div className="flex-1 text-center md:text-left space-y-4">
-            <div>
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-1.5">
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">
-                  {contactInfo.name}
-                </h2>
-                <span className="px-3 py-1 rounded-full bg-green-primary/15 text-green-dark text-xs font-black border border-green-primary/20">
-                  {contactInfo.role}
-                </span>
-              </div>
-              <p className="text-text-secondary text-xs sm:text-sm flex items-center justify-center md:justify-start gap-1.5">
-                <GraduationCap size={15} className="text-green-primary" />
-                <span>
-                  {contactInfo.prodi} • {contactInfo.universitas}
-                </span>
-              </p>
+          {/* Identity Info */}
+          <div className="flex-1 min-w-0 space-y-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
+                {contactInfo.name}
+              </h2>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-primary/10 text-green-dark border border-green-primary/20">
+                Kelompok {contactInfo.kelompok}
+              </span>
             </div>
 
-            {/* Key Information Badges: NIM & Kelompok (Required) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              {/* NIM Card with Copy Button */}
-              <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center justify-between gap-3 border border-border-color/80 shadow-sm">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-green-primary/15 text-green-primary flex items-center justify-center flex-shrink-0">
-                    <IdCard size={20} />
-                  </div>
-                  <div className="text-left min-w-0">
-                    <p className="text-[11px] font-bold text-text-muted uppercase tracking-wider">
-                      Nomor Induk Mahasiswa (NIM)
-                    </p>
-                    <p className="text-base font-black text-text-primary tracking-tight truncate">
-                      {contactInfo.nim}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(contactInfo.nim, 'nim', 'NIM')}
-                  className="p-2 rounded-xl bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-green-primary transition-all active:scale-95 shadow-xs"
-                  title="Salin NIM"
-                >
-                  {copiedField === 'nim' ? (
-                    <Check size={16} className="text-green-primary" />
-                  ) : (
-                    <Copy size={16} />
-                  )}
-                </button>
-              </div>
+            <p className="text-xs sm:text-sm text-text-secondary flex items-center gap-1.5">
+              <GraduationCap size={15} className="text-text-muted flex-shrink-0" />
+              <span>
+                {contactInfo.prodi} · {contactInfo.universitas}
+              </span>
+            </p>
 
-              {/* Kelompok Card with Copy Button */}
-              <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center justify-between gap-3 border border-border-color/80 shadow-sm">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-accent-orange/15 text-accent-orange flex items-center justify-center flex-shrink-0">
-                    <Users size={20} />
-                  </div>
-                  <div className="text-left min-w-0">
-                    <p className="text-[11px] font-bold text-text-muted uppercase tracking-wider">
-                      Kelompok Praktikum
-                    </p>
-                    <p className="text-base font-black text-text-primary tracking-tight">
-                      Kelompok {contactInfo.kelompok}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyToClipboard(`Kelompok ${contactInfo.kelompok}`, 'kelompok', 'Kelompok')
-                  }
-                  className="p-2 rounded-xl bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-accent-orange transition-all active:scale-95 shadow-xs"
-                  title="Salin Kelompok"
-                >
-                  {copiedField === 'kelompok' ? (
-                    <Check size={16} className="text-accent-orange" />
-                  ) : (
-                    <Copy size={16} />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* Quick contact / social pills */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-2">
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface hover:bg-cream border border-border-color text-text-primary transition-colors shadow-xs"
-              >
-                <Mail size={13} className="text-green-primary" />
-                <span>{contactInfo.email}</span>
-              </a>
-
-              <a
-                href={contactInfo.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface hover:bg-cream border border-border-color text-text-primary transition-colors shadow-xs"
-              >
-                <Github size={13} className="text-text-primary" />
-                <span>github.com/dkaastyns</span>
-                <ExternalLink size={11} className="text-text-muted" />
-              </a>
-
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-surface/70 border border-border-color text-text-secondary">
-                <MapPin size={13} className="text-accent-orange" />
-                <span>Semarang, Indonesia</span>
-              </div>
-            </div>
+            <p className="text-xs text-text-muted flex items-center gap-1.5">
+              <MapPin size={13} className="text-text-muted flex-shrink-0" />
+              <span>{contactInfo.location}</span>
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Two columns: Project Specification & Quick Contact Form */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Column: Project & Academic Specifications */}
-        <div className="space-y-4">
-          <h2 className="text-base font-black text-text-primary tracking-tight flex items-center gap-2 px-1">
-            <GraduationCap size={18} className="text-green-primary" />
-            <span>Spesifikasi Akademik & Proyek</span>
-          </h2>
-
-          <div className="liquid-glass-card rounded-3xl p-5 space-y-3.5 border border-white/70 shadow-card">
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">Nama Mahasiswa</span>
-                <span className="font-bold text-text-primary">{contactInfo.name}</span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">NIM</span>
-                <span className="font-extrabold text-green-primary font-mono text-sm">
-                  {contactInfo.nim}
-                </span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">Nomor Kelompok</span>
-                <span className="font-extrabold text-accent-orange">
-                  Kelompok {contactInfo.kelompok}
-                </span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">Program Studi</span>
-                <span className="font-bold text-text-primary">{contactInfo.prodi}</span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">Mata Kuliah</span>
-                <span className="font-bold text-text-primary text-right">{contactInfo.matkul}</span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border-color">
-                <span className="text-text-secondary font-medium">Nama Aplikasi</span>
-                <span className="font-bold text-text-primary">ResepinAja (PWA)</span>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span className="text-text-secondary font-medium">Status Aplikasi</span>
-                <span className="badge badge-green text-[10px] font-black">
-                  Production Ready v1.0.0
-                </span>
-              </div>
+        {/* Credentials Grid with Quick Copy */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-border-color">
+          {/* NIM */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-background border border-border-color">
+            <div className="space-y-0.5">
+              <span className="text-[11px] font-medium text-text-muted uppercase tracking-wider">
+                NIM
+              </span>
+              <p className="text-sm font-bold text-text-primary font-mono tracking-tight">
+                {contactInfo.nim}
+              </p>
             </div>
-
-            {/* Quick Copy All Details Button */}
             <button
               type="button"
-              onClick={() => {
-                const fullText = `Nama: ${contactInfo.name}\nNIM: ${contactInfo.nim}\nKelompok: Kelompok ${contactInfo.kelompok}\nProgram Studi: ${contactInfo.prodi}\nUniversitas: ${contactInfo.universitas}`
-                copyToClipboard(fullText, 'all', 'Data Mahasiswa')
-              }}
-              className="w-full btn-secondary text-xs py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 mt-2"
+              onClick={() => copyToClipboard(contactInfo.nim, 'nim', 'NIM')}
+              className="p-2 rounded-lg bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-text-primary transition-colors text-xs inline-flex items-center gap-1 font-semibold"
+              title="Salin NIM"
             >
-              {copiedField === 'all' ? (
+              {copiedField === 'nim' ? (
                 <>
                   <Check size={14} className="text-green-primary" />
-                  <span>Data Lengkap Disalin!</span>
+                  <span className="text-green-primary">Disalin</span>
                 </>
               ) : (
                 <>
                   <Copy size={14} />
-                  <span>Salin Lengkap Data Identitas</span>
+                  <span>Salin</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Kelompok */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-background border border-border-color">
+            <div className="space-y-0.5">
+              <span className="text-[11px] font-medium text-text-muted uppercase tracking-wider">
+                Kelompok Praktikum
+              </span>
+              <p className="text-sm font-bold text-text-primary">
+                {contactInfo.kelompokLabel}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => copyToClipboard(contactInfo.kelompokLabel, 'kelompok', 'Kelompok')}
+              className="p-2 rounded-lg bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-text-primary transition-colors text-xs inline-flex items-center gap-1 font-semibold"
+              title="Salin Kelompok"
+            >
+              {copiedField === 'kelompok' ? (
+                <>
+                  <Check size={14} className="text-green-primary" />
+                  <span className="text-green-primary">Disalin</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={14} />
+                  <span>Salin</span>
                 </>
               )}
             </button>
           </div>
         </div>
 
-        {/* Right Column: Send Message / Feedback to Developer */}
-        <div className="space-y-4">
-          <h2 className="text-base font-black text-text-primary tracking-tight flex items-center gap-2 px-1">
-            <MessageSquare size={18} className="text-accent-orange" />
-            <span>Kirim Pesan / Feedback</span>
-          </h2>
+        {/* Channels: Email & GitHub */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          {/* Email */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-background border border-border-color">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <Mail size={16} className="text-text-muted flex-shrink-0" />
+              <div className="min-w-0">
+                <span className="text-[11px] font-medium text-text-muted block uppercase tracking-wider">
+                  Email
+                </span>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="text-xs sm:text-sm font-semibold text-text-primary hover:text-green-primary truncate block transition-colors"
+                >
+                  {contactInfo.email}
+                </a>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => copyToClipboard(contactInfo.email, 'email', 'Email')}
+              className="p-2 rounded-lg bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-text-primary transition-colors"
+              title="Salin Email"
+            >
+              {copiedField === 'email' ? <Check size={14} className="text-green-primary" /> : <Copy size={14} />}
+            </button>
+          </div>
 
-          <form
-            onSubmit={handleSendMessage}
-            className="liquid-glass-card rounded-3xl p-5 space-y-3.5 border border-white/70 shadow-card"
+          {/* GitHub */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-background border border-border-color">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <Github size={16} className="text-text-muted flex-shrink-0" />
+              <div className="min-w-0">
+                <span className="text-[11px] font-medium text-text-muted block uppercase tracking-wider">
+                  GitHub
+                </span>
+                <a
+                  href={contactInfo.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs sm:text-sm font-semibold text-text-primary hover:text-green-primary truncate block transition-colors"
+                >
+                  {contactInfo.githubHandle}
+                </a>
+              </div>
+            </div>
+            <a
+              href={contactInfo.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-lg bg-surface hover:bg-cream border border-border-color text-text-secondary hover:text-text-primary transition-colors"
+              title="Buka GitHub"
+            >
+              <ExternalLink size={14} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Two Columns: Project Overview & Direct Message */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Project Card */}
+        <div className="bg-surface border border-border-color rounded-2xl p-5 space-y-3.5 shadow-xs">
+          <div className="flex items-center gap-2 text-text-primary">
+            <Code2 size={16} className="text-green-primary" />
+            <h3 className="text-sm font-bold">Tentang Aplikasi</h3>
+          </div>
+
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between py-1.5 border-b border-border-color">
+              <span className="text-text-secondary">Aplikasi</span>
+              <span className="font-semibold text-text-primary">ResepinAja</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-border-color">
+              <span className="text-text-secondary">Platform</span>
+              <span className="font-semibold text-text-primary">Progressive Web App (PWA)</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-border-color">
+              <span className="text-text-secondary">Mata Kuliah</span>
+              <span className="font-semibold text-text-primary text-right">{contactInfo.matkul}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-border-color">
+              <span className="text-text-secondary">Status Offline</span>
+              <span className="font-semibold text-green-primary">Mendukung (Workbox SW)</span>
+            </div>
+            <div className="flex justify-between py-1.5">
+              <span className="text-text-secondary">Repositori</span>
+              <a
+                href={contactInfo.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-green-primary hover:underline flex items-center gap-1"
+              >
+                <span>ResepinAja</span>
+                <ExternalLink size={11} />
+              </a>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              const text = `Nama: ${contactInfo.name}\nNIM: ${contactInfo.nim}\nKelompok: ${contactInfo.kelompokLabel}\nEmail: ${contactInfo.email}`
+              copyToClipboard(text, 'all', 'Data identitas')
+            }}
+            className="w-full btn-secondary text-xs py-2 rounded-xl font-semibold mt-2"
           >
+            {copiedField === 'all' ? 'Data Berhasil Disalin' : 'Salin Biodata Singkat'}
+          </button>
+        </div>
+
+        {/* Message / Feedback Form */}
+        <div className="bg-surface border border-border-color rounded-2xl p-5 space-y-3 shadow-xs">
+          <div className="flex items-center gap-2 text-text-primary">
+            <Mail size={16} className="text-accent-orange" />
+            <h3 className="text-sm font-bold">Kirim Pesan ke Pengembang</h3>
+          </div>
+
+          <form onSubmit={handleSendMessage} className="space-y-3">
             <div>
-              <label className="block text-xs font-bold text-text-primary mb-1">Nama Lengkap</label>
+              <label className="block text-[11px] font-semibold text-text-secondary mb-1">
+                Nama Anda
+              </label>
               <input
                 type="text"
-                placeholder="Masukkan nama Anda..."
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="input-field py-2.5 text-xs rounded-xl"
+                placeholder="Nama Anda"
+                className="input-field py-2 text-xs rounded-xl"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-text-primary mb-1">
-                Alamat Email (Opsional)
+              <label className="block text-[11px] font-semibold text-text-secondary mb-1">
+                Pesan
               </label>
-              <input
-                type="email"
-                placeholder="nama@email.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="input-field py-2.5 text-xs rounded-xl"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-text-primary mb-1">Pesan / Saran</label>
               <textarea
                 rows={3}
-                placeholder="Tulis kritik, saran, atau masukan untuk ResepinAja..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="input-field py-2.5 text-xs rounded-xl resize-none"
+                placeholder="Tulis pesan atau masukan..."
+                className="input-field py-2 text-xs rounded-xl resize-none"
                 required
               />
             </div>
@@ -359,16 +331,10 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full btn-primary text-xs py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-sm"
+              className="w-full btn-primary text-xs py-2.5 rounded-xl font-semibold flex items-center justify-center gap-1.5"
             >
-              {isSubmitting ? (
-                <span>Mengirim pesan...</span>
-              ) : (
-                <>
-                  <Send size={14} />
-                  <span>Kirim Pesan ke Ahmad Dika</span>
-                </>
-              )}
+              <Send size={13} />
+              <span>{isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}</span>
             </button>
           </form>
         </div>
