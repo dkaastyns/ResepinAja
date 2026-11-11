@@ -9,7 +9,7 @@ Platform penemuan resep masakan, perencanaan menu harian, dan pencatatan belanja
 [![Vite](https://img.shields.io/badge/Vite-5.4.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.11-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![PWA](https://img.shields.io/badge/PWA-Ready-557A46?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![CRUD](https://img.shields.io/badge/CRUD-Full_Implementation-E99552?style=for-the-badge)](https://github.com/dkaastyns/ResepinAja)
 [![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
 ---
@@ -19,20 +19,21 @@ Platform penemuan resep masakan, perencanaan menu harian, dan pencatatan belanja
 ## 📌 Daftar Isi
 1. [Tentang Proyek](#-tentang-proyek)
 2. [Identitas Pengembang & Kelompok](#-identitas-pengembang--kelompok)
-3. [Fitur Utama](#-fitur-utama)
-4. [Tampilan Antarmuka & UX Mewah](#-tampilan-antarmuka--ux-mewah)
-5. [Spesifikasi Teknologi (Tech Stack)](#-spesifikasi-teknologi-tech-stack)
-6. [Struktur Folder Proyek](#-struktur-folder-proyek)
-7. [Panduan Instalasi & Menjalankan Lokal](#-panduan-instalasi--menjalankan-lokal)
-8. [Setup Database Supabase](#-setup-database-supabase)
-9. [Fitur PWA & Offline Support](#-fitur-pwa--offline-support)
-10. [Panduan Deployment ke Vercel](#-panduan-deployment-ke-vercel)
+3. [Panduan Lengkap Cara Menggunakan Aplikasi](#-panduan-lengkap-cara-menggunakan-aplikasi)
+4. [Implementasi Operasi CRUD & Lokasinya](#-implementasi-operasi-crud-create-read-update-delete)
+5. [Fitur Utama Aplikasi](#-fitur-utama-aplikasi)
+6. [Tampilan Antarmuka & UX Mewah](#-tampilan-antarmuka--ux-mewah)
+7. [Spesifikasi Teknologi (Tech Stack)](#-spesifikasi-teknologi-tech-stack)
+8. [Struktur Folder Proyek](#-struktur-folder-proyek)
+9. [Panduan Instalasi & Menjalankan Lokal](#-panduan-instalasi--menjalankan-lokal)
+10. [Fitur PWA & Offline Support](#-fitur-pwa--offline-support)
+11. [Panduan Deployment ke Vercel](#-panduan-deployment-ke-vercel)
 
 ---
 
 ## 📖 Tentang Proyek
 
-**ResepinAja** adalah aplikasi web modern yang dirancang untuk memecahkan kebingungan harian: *"Hari ini mau masak apa?"*. Aplikasi ini memudahkan pengguna menemukan resep masakan nusantara maupun mancanegara berdasarkan bahan yang ada di kulkas, mengelola resep pribadi, merancang jadwal menu makan mingguan, serta menyusun daftar belanja bahan secara otomatis.
+**ResepinAja** adalah aplikasi web modern yang dirancang untuk memecahkan kebingungan harian: *"Hari ini mau masak apa?"*. Aplikasi ini memudahkan pengguna menemukan resep masakan nusantara maupun mancanegara berdasarkan bahan yang ada di kulkas, mengelola resep pribadi dengan operasi **CRUD lengkap**, merancang jadwal menu makan mingguan, serta menyusun daftar belanja bahan secara otomatis.
 
 Dikembangkan dengan pendekatan **Mobile-First & Desktop-Responsive PWA**, aplikasi ini dapat diinstal di smartphone maupun laptop layaknya aplikasi *native*, serta dapat diakses penuh meskipun perangkat dalam kondisi **offline tanpa koneksi internet**.
 
@@ -60,9 +61,118 @@ Dikembangkan dengan pendekatan **Mobile-First & Desktop-Responsive PWA**, aplika
 
 ---
 
-## 🚀 Fitur Utama
+## 🎮 Panduan Lengkap Cara Menggunakan Aplikasi
 
-Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitur komprehensif:
+Berikut adalah alur panduan langkah demi langkah untuk memaksimalkan seluruh fitur di **ResepinAja**:
+
+```mermaid
+flowchart TD
+    A[Buka ResepinAja] --> B{Pilih Kebutuhan Anda}
+    B -->|Cari Inspirasi| C[Beranda / Jelajah Resep]
+    B -->|Ada Bahan di Kulkas| D[Fitur 'Dari Bahan']
+    B -->|Buat / Kelola Resep| E[Menu 'Resep Saya' & '+ Tulis Resep']
+    B -->|Rencanakan Menu| F[Menu 'Jadwal' Mingguan]
+    B -->|Belanja Bahan| G[Menu 'Daftar Belanja']
+    
+    C --> H[Detail Resep & Mode Masak Interaktif]
+    D --> H
+    H -->|Satu Klik| G
+    H -->|Jadikan Favorit| I[Menu 'Favorit']
+    E -->|CRUD Resep| J[Simpan di LocalStorage]
+```
+
+### 1. Mencari & Menjelajahi Resep
+1. **Pencarian Cepat di Beranda (`/`)**:
+   - Ketik nama hidangan pada kolom pencarian hero (contoh: *"nasi goreng"*, *"rendang"*).
+   - Klik chip kategori cepat seperti *Makanan Cepat ≤20m*, *Cari dari Bahan*, atau *Rencana Menu*.
+2. **Jelajah Terstruktur (`/jelajah`)**:
+   - Buka menu **Jelajah** pada navbar.
+   - Gunakan filter kategori (*Makanan Utama, Sarapan, Camilan, Minuman, Dessert, Sup & Soto, Seafood, Vegetarian*).
+   - Gunakan filter tingkat kesulitan (*Mudah, Sedang, Sulit*) serta pengurutan (*Terbaru, Terlama, Waktu Tercepat, Nama A-Z*).
+   - **Paginasi Cerdas**: Hasil resep dibatasi **maksimal 8 item per halaman** agar tampilan rapi, ringan, dan tidak memberatkan peramban. Gunakan tombol nomor halaman atau *Sebelumnya / Selanjutnya* untuk berpindah halaman.
+
+### 2. Memasak dengan Mode Interaktif (`/resep/:id`)
+1. Klik salah satu kartu resep untuk membuka halaman detail.
+2. **Pengatur Porsi Otomatis (*Servings Scaler*)**: Tekan tombol `−` atau `+` pada porsi. Takaran semua bahan (gram, butir, sdm) akan otomatis dikalkulasi ulang secara proporsional.
+3. **Mode Memasak Interaktif**: Pindah ke tab *"Langkah Memasak"*, lalu centang setiap tahapan yang sudah selesai dilakukan. Aplikasi menyediakan bilah kemajuan (*progress bar*) dan efek selebrasi saat hidangan tuntas dimasak!
+4. **Kirim ke Daftar Belanja**: Klik tombol **"Ke Daftar Belanja"** untuk mengekspor seluruh bahan masakan ke daftar belanja hanya dengan satu ketukan.
+
+### 3. Mencari Resep dari Bahan yang Tersedia (`/dari-bahan`)
+1. Buka menu **Dari Bahan**.
+2. Masukkan bahan-bahan yang Anda miliki di kulkas (misal: *telur, bawang, ayam*).
+3. Klik tombol **Cari Resep**.
+4. Sistem akan mengurutkan resep berdasarkan **persentase kecocokan (*match percentage*)** tertinggi.
+
+### 4. Membuat & Mengelola Resep Sendiri (`/resep-saya`)
+1. Klik tombol hijau **"+ Tulis Resep"** pada kapsul navigasi atas atau navigasi bawah.
+2. Isi formulir: judul resep, deskripsi, URL foto makanan, kategori, durasi persiapan & memasak, jumlah porsi, tingkat kesulitan, daftar bahan (nama, jumlah, satuan), serta langkah instruksi.
+3. Klik **"Simpan Resep"**. Resep Anda akan langsung tersimpan dan memiliki lencana khusus *"Resep Saya"*.
+4. Anda dapat mengedit kembali (*Update*) atau menghapusnya (*Delete*) kapan pun.
+
+### 5. Mengatur Jadwal Makan Mingguan (`/jadwal`)
+1. Buka menu **Jadwal**.
+2. Pilih hari (Senin s.d. Minggu).
+3. Pada tiap slot waktu (*Sarapan 🌅, Makan Siang ☀️, Makan Malam 🌙, Camilan 🍪*), klik tombol **"+ Tambah Menu"**.
+4. Pilih hidangan dari koleksi resep yang tersedia. Menu terjadwal akan tersimpan rapi untuk memandu hari-hari Anda.
+
+### 6. Mengelola Daftar Belanja (`/belanja`)
+1. Buka menu **Belanja**.
+2. Bahan dapat berasal otomatis dari resep yang diekspor atau ditambahkan secara manual melalui form input.
+3. Saat berbelanja di pasar/supermarket, centang kotak belanjaan yang sudah dimasukkan ke keranjang.
+4. Gunakan tombol **"Hapus yang Selesai"** untuk membersihkan bahan yang sudah dibeli.
+
+### 7. Cadangkan & Pulihkan Data (`/pengaturan`)
+- Buka menu **Pengaturan** (ikon gerigi).
+- **Ekspor Data**: Klik *Ekspor Cadangan (.json)* untuk mengunduh seluruh data resep, favorit, jadwal, dan belanja ke komputer/HP Anda.
+- **Impor Data**: Unggah file `.json` cadangan untuk memulihkan seluruh data Anda sewaktu-waktu.
+
+---
+
+## 🔄 Implementasi Operasi CRUD (Create, Read, Update, Delete)
+
+Aplikasi **ResepinAja** mengimplementasikan operasi data **CRUD secara penuh, menyeluruh, dan persisten** menggunakan HTML5 LocalStorage *(Offline-First Architecture)*. 
+
+Berikut adalah **Matriks Lokasi & Penjelasan Operasi CRUD** di dalam aplikasi:
+
+| Modul Fitur | ➕ Create (Buat) | 👁️ Read (Tampilkan) | ✏️ Update (Ubah) | 🗑️ Delete (Hapus) |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Resep Pengguna (Core CRUD)** | Tombol `+ Tulis Resep` di Navbar atau `/resep-saya` | Beranda (`/`), Jelajah (`/jelajah`), Resep Saya (`/resep-saya`), & Detail (`/resep/:id`) | Tombol `Edit` (ikon pensil) pada kartu resep di `/resep-saya` atau halaman detail resep pribadi | Tombol `Hapus` (ikon sampah merah) pada kartu resep dengan modal konfirmasi keamanan |
+| **2. Daftar Belanja (Shopping List)** | Input form manual di `/belanja` ATAU tombol `+ Ke Daftar Belanja` di detail resep | Daftar belanja di `/belanja` lengkap dengan counter item belum & sudah dibeli | Centang/uncheck status beli (selesai vs belum) dan penyesuaian jumlah bahan | Tombol sampah per baris item, tombol `Hapus yang Selesai`, & tombol `Bersihkan Semua` |
+| **3. Jadwal Menu (Meal Planner)** | Klik tombol `+ Tambah` pada slot Sarapan/Siang/Malam/Camilan per hari | Tampilan kalender mingguan interaktif (Senin–Minggu) di `/jadwal` | Klik ganti menu pada slot jadwal untuk menimpa hidangan yang dipilih | Tombol silang `(X)` pada kartu menu terjadwal untuk menghapus menu dari slot |
+| **4. Resep Favorit** | Klik ikon hati (❤️) pada kartu resep atau detail resep | Galeri resep favorit di halaman `/favorit` dan counter live di beranda | Toggle status favorit (aktif / non-aktif) secara instan | Klik kembali ikon hati (❤️) untuk membatalkan/menghapus resep dari daftar favorit |
+| **5. Profil Pengguna** | Inisialisasi profil default otomatis saat aplikasi pertama kali dibuka | Halaman `/profil` menampilkan Nama, NIM, Kelompok, Email, dan Statistik | Formulir edit profil di `/profil` untuk mengubah Nama, NIM, Kelompok, dan Email | Tombol `Batal` / modifikasi field kembali ke nilai awal |
+| **6. Ekspor / Impor / Reset** | Ekspor cadangan database lokal ke file `.json` | Membaca isi file cadangan `.json` via dialog file picker | Impor dan sinkronisasi data dari file cadangan ke LocalStorage | Fitur `Reset Semua Data` di `/pengaturan` untuk menghapus seluruh data aplikasi |
+
+---
+
+### 🔍 Rincian Teknis Implementasi CRUD Resep
+
+#### 1. CREATE (Tambah Resep Baru)
+- **Komponen**: `src/components/forms/RecipeForm.jsx` & `src/pages/MyRecipes.jsx`
+- **Hook**: `src/hooks/useRecipes.js` ➔ fungsi `addRecipe(newRecipeData)`
+- **Validasi**: Judul wajib diisi, minimal 1 bahan masakan, minimal 1 tahapan instruksi, validasi durasi memasak dan porsi.
+- **Penyimpanan**: Menghasilkan ID unik (`recipe_user_${Date.now()}`), menambahkan flag `isUserRecipe: true`, timestamp `createdAt`, lalu disimpan ke `resepinaja_user_recipes` di LocalStorage.
+
+#### 2. READ (Membaca & Menampilkan Resep)
+- **Komponen**: `src/pages/Explore.jsx`, `src/pages/Home.jsx`, `src/pages/MyRecipes.jsx`, `src/pages/RecipeDetail.jsx`
+- **Hook**: `useRecipes()` ➔ mengembalikan `allRecipes` (hasil penggabungan 12 resep bawaan + seluruh resep buatan pengguna).
+- **Fitur Tambahan**: Dilengkapi filter kategori, filter kesulitan, pencarian teks, pengurutan, serta **paginasi 8 item per halaman** di halaman Jelajah.
+
+#### 3. UPDATE (Mengubah Resep yang Ada)
+- **Komponen**: `src/components/forms/RecipeForm.jsx` (mode edit)
+- **Hook**: `src/hooks/useRecipes.js` ➔ fungsi `updateRecipe(recipeId, updatedData)`
+- **Alur Kerja**: Saat tombol pensil ditekan, form dimuat dengan state data resep yang dipilih. Setelah disimpan, field `updatedAt` diperbarui dan state aplikasi langsung disinkronkan tanpa reload halaman.
+
+#### 4. DELETE (Menghapus Resep)
+- **Komponen**: `src/components/ui/Modal.jsx` & `src/pages/MyRecipes.jsx`
+- **Hook**: `src/hooks/useRecipes.js` ➔ fungsi `deleteRecipe(recipeId)`
+- **Keamanan**: Dilengkapi **dialog konfirmasi modal**. Data hanya dihapus dari LocalStorage jika pengguna menekan tombol konfirmasi merah *"Ya, Hapus"*. Notifikasi toast mengambang akan memberi umpan balik instan bahwa resep berhasil dihapus.
+
+---
+
+## 🚀 Fitur Utama Aplikasi
+
+Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki fitur komprehensif:
 
 ### 1. 🏠 Home / Dashboard
 - **Animasi Startup**: Splash screen animasi topi koki dengan bilah proses pembuka saat aplikasi pertama kali dimuat.
@@ -73,11 +183,12 @@ Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitu
 - **Resep Rekomendasi Hari Ini**: Kartu resep sorotan (*featured card*) bergaya modern.
 - **Resep Populer, Cepat (≤ 20 Menit), & Terbaru**: Pembagian kurasi resep sesuai kebutuhan waktu.
 
-### 2. 🔍 Recipe Explorer
+### 2. 🔍 Recipe Explorer & Pagination
 - Pencarian cerdas berdasarkan nama resep, bumbu, atau kategori.
 - Filter multi-kategori: *Makanan Utama, Sarapan, Camilan, Minuman, Dessert, Sup & Soto, Seafood, Vegetarian*.
 - Filter tingkat kesulitan: *Mudah, Sedang, Sulit*.
 - Pengurutan (*Sorting*): *Terbaru, Terlama, Waktu Tercepat, Nama A-Z, Nama Z-A*.
+- **Paginasi Terbatas (Maksimal 8 Item / Halaman)**: Memastikan performa rendering tetap ringan, rapi, dan responsif di perangkat seluler maupun laptop.
 
 ### 3. 📄 Recipe Detail Interaktif
 - Foto makanan resolusi tinggi dengan efek *lazy loading blur-up*.
@@ -92,7 +203,7 @@ Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitu
 - Algoritma pencocokan menghitung **persentase kecocokan (*match percentage*)** untuk setiap resep.
 - Menampilkan resep teratas yang dapat langsung dimasak tanpa perlu belanja tambahan.
 
-### 5. 👨‍🍳 My Recipes (Koleksi Resep Pribadi)
+### 5. 👨‍🍳 My Recipes (Koleksi Resep Pribadi - Full CRUD)
 - Manajemen CRUD penuh (*Create, Read, Update, Delete*).
 - Tambahkan foto, durasi persiapan, waktu memasak, porsi, kategori, takaran bahan, dan tahapan instruksi.
 - Label khusus *"Resep Saya"* pada setiap hidangan buatan pengguna.
@@ -114,7 +225,7 @@ Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitu
 - Filter pembersihan: Hapus bahan yang sudah selesai dibeli atau bersihkan seluruh daftar.
 
 ### 9. 👤 Profil Mahasiswa & Pengguna
-- Menampilkan Nama, NIM, Kelompok, dan Email.
+- Menampilkan Nama, NIM, Kelompok, dan Email (`dikatzy@gmail.com`).
 - Lencana identitas resmi untuk keperluan penilaian tugas kuliah.
 - Statistik ringkasan: jumlah resep dibuat, total favorit, menu terjadwal, dan item belanjaan.
 
@@ -127,14 +238,14 @@ Sesuai dengan *Product Requirements Document (PRD)*, ResepinAja memiliki 10 fitu
 ### 11. 📇 Info Kontak & Tim Pengembang
 - Halaman identitas resmi pengembang: **Ahmad Dika Styansah** (NIM: **21120124130052**, Kelompok: **23**).
 - Tombol salin satu-klik (*One-Click Copy*) untuk NIM, Kelompok, dan seluruh data identitas mahasiswa.
-- Tautan kontak email mahasiswa dan repositori GitHub pengembang.
+- Tautan kontak email mahasiswa (`dikatzy@gmail.com`) dan repositori GitHub pengembang.
 - Formulir umpan balik (*Feedback Form*) langsung untuk pengguna.
 
 ---
 
 ## 🎨 Tampilan Antarmuka & UX Mewah
 
-Aplikasi dibangun mengikuti filosofi desain: *Modern, Warm, Clean, Premium, Minimalist, Fresh, & Appetizing*.
+Aplikasi dibangun mengikuti filosofi desain editorial modern: *Warm, Clean, Premium, Minimalist, Fresh, & Anti-AI-Slop*.
 
 | Token Desain | Nilai Warna | Kegunaan |
 | :--- | :--- | :--- |
@@ -152,6 +263,7 @@ Aplikasi dibangun mengikuti filosofi desain: *Modern, Warm, Clean, Premium, Mini
 - **iOS Liquid Glass Floating Capsule Navigation**: Bilah navigasi atas (Desktop) dan bilah navigasi bawah (Mobile) dirancang melayang (*floating capsule*) dengan efek kaca cair (*liquid glass / frosted glassmorphism blur-2xl*) ala iOS iPhone dengan pantulan specular dan border halus.
 - **Startup Splash Animation**: Layar intro memukau saat membuka aplikasi.
 - **Heart Pop Bounce**: Animasi pegas pada ikon favorit saat ditekan.
+- **Staggered Card Entrance**: Kartu resep muncul satu per satu dengan transisi halus saat halaman berpindah.
 - **Floating Luxury Toast Notification**: Notifikasi mengambang saat aksi berhasil dilakukan.
 - **Shimmer Skeleton Loader**: Animasi bayangan saat gambar makanan sedang dimuat.
 - **Corner PWA Install Banner**: Notifikasi instalasi di pojok bawah dengan opsi *"Ya, Pasang"*, *"Tidak, Nanti"*, atau tombol silang *(X)*.
@@ -185,20 +297,22 @@ d:\ResepinAja\
 │   ├── assets/                    # Aset grafis statis
 │   ├── components/
 │   │   ├── forms/
-│   │   │   └── RecipeForm.jsx     # Formulir input/edit resep
+│   │   │   └── RecipeForm.jsx     # Formulir input/edit resep (CRUD Create & Update)
 │   │   ├── layout/
-│   │   │   ├── BottomNav.jsx      # Navigasi bawah untuk mobile
+│   │   │   ├── BottomNav.jsx      # Navigasi bawah liquid glass untuk mobile
 │   │   │   ├── Layout.jsx         # Pembungkus layout utama responsif
-│   │   │   └── Navbar.jsx         # Navigasi atas desktop & mobile
+│   │   │   └── Navbar.jsx         # Navigasi atas liquid glass desktop & mobile
 │   │   └── ui/
 │   │       ├── CategoryCard.jsx   # Kartu kategori masakan
 │   │       ├── EmptyState.jsx     # Tampilan status kosong
 │   │       ├── FilterBar.jsx      # Bilah filter & pengurutan
 │   │       ├── InstallPrompt.jsx  # Pop-up pasang PWA di pojok bawah
 │   │       ├── LazyImage.jsx      # Gambar dengan shimmer skeleton & fallback
-│   │       ├── Modal.jsx          # Modal dialog interaktif
+│   │       ├── Modal.jsx          # Modal dialog interaktif (konfirmasi CRUD)
 │   │       ├── PageLoader.jsx     # Loader transisi antar halaman
 │   │       ├── RecipeCard.jsx     # Kartu resep dengan efek mikroanimasi
+│   │       ├── RecipeCardSkeleton.jsx # Skeleton placeholder kartu resep
+│   │       ├── RecipeGridSkeleton.jsx # Skeleton grid placeholder
 │   │       ├── SearchBar.jsx      # Kolom pencarian resep
 │   │       └── StartupSplash.jsx  # Animasi intro pembuka aplikasi
 │   ├── context/
@@ -208,16 +322,17 @@ d:\ResepinAja\
 │   ├── hooks/
 │   │   ├── useFavorites.js        # Hook pengelolaan resep favorit
 │   │   ├── useMealPlanner.js      # Hook jadwal menu mingguan
-│   │   ├── useProfile.js          # Hook profil (Nama, NIM, Kelompok)
-│   │   ├── useRecipes.js          # Hook data resep (bawaan + resep pribadi)
+│   │   ├── useProfile.js          # Hook profil (Nama, NIM, Kelompok, Email)
+│   │   ├── useRecipes.js          # Hook data resep (CRUD state & LocalStorage)
 │   │   └── useShoppingList.js     # Hook daftar belanja bahan
 │   ├── pages/
-│   │   ├── Explore.jsx            # Halaman Jelajah Resep
+│   │   ├── Contact.jsx            # Halaman Info Kontak Pengembang
+│   │   ├── Explore.jsx            # Halaman Jelajah Resep (dengan Paginasi 8 item)
 │   │   ├── Favorites.jsx          # Halaman Resep Favorit
 │   │   ├── Home.jsx               # Halaman Beranda Utama
 │   │   ├── IngredientSearch.jsx   # Halaman Cari Resep dari Bahan
 │   │   ├── MealPlanner.jsx        # Halaman Perencanaan Menu
-│   │   ├── MyRecipes.jsx          # Halaman Koleksi Resep Pribadi (CRUD)
+│   │   ├── MyRecipes.jsx          # Halaman Koleksi Resep Pribadi (CRUD UI)
 │   │   ├── Profile.jsx            # Halaman Profil & Identitas Mahasiswa
 │   │   ├── RecipeDetail.jsx       # Halaman Detail & Mode Memasak
 │   │   ├── Settings.jsx           # Halaman Pengaturan & Backup Data
@@ -234,7 +349,6 @@ d:\ResepinAja\
 │   └── migrations/
 │       ├── 001_initial_schema.sql # Skema tabel & trigger
 │       └── 002_seed_recipes.sql   # Data awal resep masakan
-├── .env                           # Konfigurasi environment lokal
 ├── .env.example                   # Template variabel environment
 ├── .gitignore                     # Daftar pengecualian Git
 ├── index.html                     # HTML template utama PWA
@@ -257,7 +371,8 @@ d:\ResepinAja\
 
 1. **Clone atau Masuk ke Direktori Proyek**:
    ```bash
-   cd d:\ResepinAja
+   git clone https://github.com/dkaastyns/ResepinAja.git
+   cd ResepinAja
    ```
 
 2. **Pasang Dependensi**:
@@ -265,39 +380,21 @@ d:\ResepinAja\
    pnpm install --ignore-scripts
    ```
 
-3. **Konfigurasi Environment Variable**:
-   File `.env` sudah tersedia secara otomatis. Jika diperlukan, sesuaikan nilai kredensial Supabase Anda:
-   ```env
-   VITE_SUPABASE_URL=https://urelntbrlxwvssfglwll.supabase.co
-   VITE_SUPABASE_ANON_KEY=sb_publishable_3EDlVkDSw2u-UDA2rWcU4Q_21ScHIPg
-   ```
-
-4. **Jalankan Server Development**:
+3. **Jalankan Server Development**:
    ```bash
    pnpm run dev
    ```
    Aplikasi akan aktif di `http://localhost:5173`. Buka tautan tersebut pada peramban Anda.
 
-5. **Build untuk Produksi**:
+4. **Build untuk Produksi**:
    ```bash
    pnpm run build
    ```
 
-6. **Uji Coba Hasil Build**:
+5. **Uji Coba Hasil Build**:
    ```bash
    pnpm run preview
    ```
-
----
-
-## 🗄️ Setup Database Supabase
-
-Jika ingin menghubungkan aplikasi dengan database cloud Supabase:
-
-1. Buka [Supabase Dashboard](https://supabase.com/dashboard) dan pilih project Anda.
-2. Masuk ke menu **SQL Editor** pada navigasi kiri.
-3. Buka file `supabase/full_setup.sql`, salin seluruh kodenya, tempelkan ke SQL Editor, lalu klik tombol **Run**.
-4. Skema database, trigger otomatis `updated_at`, fungsi pembuatan profil akun baru, kebijakan Row Level Security (RLS), serta 12 seed data resep awal akan langsung terpasang.
 
 ---
 
@@ -325,14 +422,13 @@ Proyek ini sudah dilengkapi konfigurasi `vercel.json` untuk menangani *Single Pa
    vercel --prod
    ```
 
-3. Pada **Vercel Dashboard ➔ Project Settings ➔ Environment Variables**, masukkan:
-   - `VITE_SUPABASE_URL` = URL project Supabase Anda
-   - `VITE_SUPABASE_ANON_KEY` = Anon key Supabase Anda
-
 ---
 
 <div align="center">
 
 **ResepinAja** · *Dibuat dengan ❤️ untuk kemudahan memasak setiap hari.*
+
+Pengembang: **Ahmad Dika Styansah** (NIM: **21120124130052**, Kelompok: **23**)  
+Kontak: [`dikatzy@gmail.com`](mailto:dikatzy@gmail.com)
 
 </div>
